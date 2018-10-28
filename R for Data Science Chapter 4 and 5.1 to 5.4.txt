@@ -1,0 +1,46 @@
+4.4
+1. The code doesn't work because "my_variable" in the second line has a 1 instead of an i 
+2. ggplot(data = mpg) +  
+  geom_point(mapping = aes(x = displ, y=hwy))
+
+  filter(mpg, cyl == 8)
+filter(diamonds, carat > 3)
+
+3. This brings up the keyboard shortcut quick reference tab. Another way to get to the same place is to go to Tools -> Keyboard Shortcuts Help
+
+
+5.2
+1. 
+    1. filter(flights, arr_delay>=120)
+    2. filter(flights, dest %in% c('IAH', 'HOU'))
+    3. filter(flights, carrier == 'UA' | carrier == 'AA' | carrier == 'DL')
+    4. filter(flights, month >= 7 & month <= 9)
+    5. filter(flights, arr_delay > 120, dep_delay <= 0)
+    6. filter(flights, dep_delay >= 60, dep_delay-arr_delay > 30)
+    7. filter(flights, dep_time <=600 | dep_time == 2400)
+2. between() can function as a shortcut for x>= left & x<= right. Can be used to find values in a specific range. It could be used in (4) above for the months 7 and 9, as well as (7) above to pull hours between 12am and 6am
+3. 8,255 have a missing dep time. dep_delay, arr_time, arr_delay, and air_time are also missing. These could just be data that didn't get recorded on the flights
+4. NA ^ 0 is always going to be 1.
+   NA | TRUE will always be true since | siginifies TRUE if either term is true
+   & will return a value based on one of the values, so you don't need a value on both sides
+
+
+5.3
+1. df <- tibble(x = c(5, 2, NA))
+arrange(df, desc(is.na(x)))
+arrange(df, -(is.na(x)))
+2. arrange(flights, desc(dep_delay))
+arrange(flights, dep_delay)
+3.arrange(flights, (arr_time - dep_time))
+4. arrange(flights, desc(distance)) %>% select(1:5, distance)
+arrange(flights, distance) %>% select(1:5, distance)
+
+5.4
+1. select(flights, dep_time,  dep_delay, arr_time, arr_delay)
+select(flights, c(dep_time,  dep_delay, arr_time, arr_delay))
+flights %>% select(dep_time,  dep_delay, arr_time, arr_delay)
+flights %>% select_("dep_time",  "dep_delay", "arr_time", "arr_delay")
+2. You would get the variable once if you include the name of it multiple times
+3. It returns all variables you ask for
+4. Yes, somewhat, since the select clause is not case sensitive. You could add a "ignore.case = FALSE"
+
